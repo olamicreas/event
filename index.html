@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Masterpiece Plus LLC - Event Decorations & Rentals</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;500&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lora', serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #fefaf6;
+        }
+
+        h1, h3, h6 {
+            font-family: 'Playfair Display', serif;
+            color: #2b1e0f;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #000;
+        }
+
+        /* Transparent Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 80px; /* Increased for larger logo container */
+        }
+
+        .navbar-logo {
+            max-height: 100%; /* Fits within header height */
+            max-width: 200px; /* Increased for larger logo */
+            width: auto; /* Maintains aspect ratio */
+            object-fit: contain; /* Prevents distortion */
+            transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth hover effect */
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.1); /* Slight zoom on hover */
+            opacity: 0.9; /* Subtle fade effect */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #d4a373;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #d4a373, #b8860b);
+            color: white;
+            padding: 12px 40px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            min-width: 180px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-left: 30px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            font-size: 1.8em;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 80px; /* Adjusted to account for larger logo height */
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul li a {
+                color: #333;
+                padding: 10px 0;
+                display: block;
+            }
+
+            .cta-button {
+                margin: 20px auto 10px;
+                min-width: 160px;
+                padding: 10px 30px;
+            }
+
+            .logo {
+                height: 60px; /* Adjusted for tablets */
+            }
+
+            .navbar-logo {
+                max-width: 150px; /* Adjusted for tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 50px; /* Adjusted for mobile */
+            }
+
+            .navbar-logo {
+                max-width: 120px; /* Adjusted for mobile */
+            }
+
+            .cta-button {
+                min-width: 140px;
+                padding: 8px 25px;
+            }
+        }
+
+        /* Hero Section Carousel */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+        }
+
+        .carousel-content {
+            z-index: 1;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .carousel-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-content p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .carousel-controls button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5em;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .carousel-controls button:hover {
+            color: #d4a373;
+            transform: scale(1.2);
+        }
+
+        /* About Us Section */
+        .about {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #fff;
+        }
+
+        .acontainer {
+            width: 90%;
+            max-width: 1170px;
+            height: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 60px;
+            padding: 35px 0;
+            place-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contentLeft,
+        .contentRight {
+            width: 100%;
+        }
+
+        .contentLeft .row {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        .contentLeft .row .imgWrapper {
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .contentLeft .row .imgWrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+            transition: 0.3s ease;
+        }
+
+        .contentLeft .row .imgWrapper:hover img {
+            transform: scale(1.5);
+        }
+
+        .contentLeft .row .imgWrapper:nth-child(odd) {
+            transform: translateY(-20px);
+        }
+
+        .contentLeft .row .imgWrapper:nth-child(even) {
+            transform: translateY(20px);
+        }
+
+        .contentRight .acontent {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contentRight .acontent h4 {
+            font-size: 22px;
+            font-weight: 400;
+            color: #d35400;
+        }
+
+        .contentRight .acontent h2 {
+            font-size: 40px;
+            color: #1e272e;
+        }
+
+        .contentRight .acontent p {
+            font-size: 16px;
+            color: #343434;
+            line-height: 28px;
+            padding-bottom: 10px;
+        }
+
+        .contentRight .acontent a {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 1px;
+            padding: 13px 30px;
+            color: #fff;
+            background: #d35400;
+            border-radius: 8px;
+            user-select: none;
+        }
+
+        @media(max-width: 768px) {
+            .acontainer {
+                grid-template-columns: 1fr;
+            }
+
+            .contentLeft .row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contentLeft .row .imgWrapper {
+                height: 150px;
+            }
+
+            .contentRight .acontent h4 {
+                font-size: 18px;
+            }
+
+            .contentRight .acontent h2 {
+                font-size: 30px;
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #fff;
+        }
+
+        .rentals {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f5f5f5;
+        }
+
+        .gallery {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #fff;
+        }
+
+        .video-gallery {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f5f5f5;
+        }
+
+        .contact {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #fff;
+        }
+
+        .services h2, .rentals h2, .gallery h2, .video-gallery h2, .contact h2 {
+            font-size: 3em;
+            margin-bottom: 50px;
+        }
+
+        .service-grid, .rental-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card, .rental-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover, .rental-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card img, .rental-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Image Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay p {
+            color: white;
+            font-size: 1.4em;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Enhanced View More Button */
+        .view-more-button {
+            display: block;
+            margin: 30px auto;
+            background: linear-gradient(45deg, #d4a373, #b8860b, #ffd700, #ff8c00);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.4em;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
+            animation: glow 2s infinite ease-in-out, shimmer 3s infinite linear;
+        }
+
+        .view-more-button:hover {
+            transform: scale(1.15) rotate(3deg);
+            box-shadow: 0 10px 25px rgba(212, 163, 115, 0.7);
+            background: linear-gradient(45deg, #ff8c00, #ffd700, #b8860b, #d4a373);
+        }
+
+        .view-more-button::before,
+        .view-more-button::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: sparkle 1.8s infinite ease-in-out;
+        }
+
+        .view-more-button::before {
+            top: 10%;
+            left: 15%;
+            animation-delay: 0.3s;
+        }
+
+        .view-more-button::after {
+            bottom: 10%;
+            right: 15%;
+            animation-delay: 0.7s;
+        }
+
+        .view-more-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .view-more-button .shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(212, 163, 115, 0.6), 0 0 20px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(212, 163, 115, 1), 0 0 30px rgba(255, 215, 0, 0.6); }
+            100% { box-shadow: 0 0 10px rgba(212, 163, 115, 0.6), 0 0 20px rgba(255, 215, 0, 0.4); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.9; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Video Gallery Section */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .video-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .video-item:hover {
+            transform: scale(1.05);
+        }
+
+        .video-item img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .video-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .video-item:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .video-overlay p {
+            color: white;
+            font-size: 1.4em;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .video-overlay .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: #d4a373;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .video-item:hover .play-icon {
+            opacity: 1;
+        }
+
+        /* Lightbox for Images */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal video {
+            width: 80%;
+            height: 80%;
+            max-width: 1200px;
+            max-height: 675px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .video-modal .thumbnail-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal .thumbnail-overlay.active {
+            display: flex;
+        }
+
+        .video-modal .thumbnail-overlay .play-icon {
+            font-size: 4em;
+            color: #d4a373;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .video-modal .thumbnail-overlay .play-icon:hover {
+            opacity: 1;
+        }
+
+        /* React Gallery Modal */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+        }
+
+        .gallery-modal .container {
+            position: relative;
+            width: 80vmin;
+            height: 80vmin;
+            max-height: 800px;
+            max-width: 800px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: linear-gradient(0deg, rgba(212, 163, 115, 0.2), rgba(212, 163, 115, 0)),
+                        linear-gradient(120deg, rgba(184, 134, 11, 0.3), rgba(0, 0, 0, 0));
+        }
+
+        .gallery-modal .shadow {
+            box-shadow:
+                0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+                0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+                0 12.5px 10px rgba(0, 0, 0, 0.035),
+                0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+                0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+                0 100px 80px rgba(0, 0, 0, 0.07);
+        }
+
+        .gallery-modal .image, .gallery-modal .tabs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-modal .image svg {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        .gallery-modal .image image {
+            width: 100%;
+            min-height: 100vh;
+            object-fit: cover;
+        }
+
+        .gallery-modal .border {
+            fill: white;
+            fill-opacity: 0;
+            stroke: #d4a373;
+            stroke-width: 2;
+            stroke-opacity: 0.7;
+            cursor: pointer;
+        }
+
+        .gallery-modal .border:hover {
+            stroke-opacity: 1;
+        }
+
+        .gallery-modal text {
+            fill: white;
+            font-size: 28px;
+            stroke: #2b1e0f;
+            stroke-width: 1;
+            stroke-opacity: 0.75;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gallery-modal .button {
+            z-index: 1000;
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateX(50%) translateY(-50%);
+            width: 70px;
+            height: 70px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .gallery-modal .button:hover {
+            transform: translateX(52%) translateY(-48%);
+        }
+
+        .gallery-modal .button svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+
+        .modal-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .modal-controls button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5em;
+            padding: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-controls button:hover {
+            color: #d4a373;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #d4a373;
+        }
+
+        /* Contact Section */
+        .contact form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact input, .contact textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1em;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .contact input:focus, .contact textarea:focus {
+            border-color: #d4a373;
+            outline: none;
+        }
+
+        .contact button {
+            background: linear-gradient(135deg, #d4a373, #b8860b);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .advanced-footer {
+            background: #2C3E50;
+            color: #fff;
+            padding: 40px 15px 20px;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer-logo {
+            max-width: 220px;
+            margin: 0 auto 15px;
+            margin-top: -10%;
+        }
+
+        .logo-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .footer-col h6 {
+            font-size: 15px;
+            color: #f0f0f0;
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .footer-col h6::after {
+            content: "";
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            margin: 4px auto;
+            transition: width 0.3s ease;
+        }
+
+        .footer-col h6:hover::after {
+            width: 40px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #fff;
+            background: rgba(255,255,255,0.2);
+            height: 38px;
+            width: 38px;
+            border-radius: 50%;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.15);
+            background: #fff;
+            color: #d4a373;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.25);
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-content h1 {
+                font-size: 2.8em;
+            }
+
+            .carousel-content p {
+                font-size: 1.1em;
+            }
+
+            .gallery-item img, .video-item img {
+                height: 250px;
+            }
+
+            .video-modal video, .video-modal .thumbnail-overlay {
+                width: 90%;
+                height: 60%;
+            }
+
+            .gallery-modal .container {
+                width: 90vmin;
+                height: 90vmin;
+                max-height: 600px;
+                max-width: 600px;
+            }
+
+            .footer-grid {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .footer-col {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-logo {
+                margin: 0 auto 10px;
+            }
+
+            .footer-col h6 {
+                font-size: 14px;
+            }
+
+            .footer-col ul li a {
+                font-size: 0.9em;
+            }
+
+            .social-icons a {
+                font-size: 14px;
+                height: 35px;
+                width: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-content h1 {
+                font-size: 2em;
+            }
+
+            .carousel-content p {
+                font-size: 0.9em;
+            }
+
+            .gallery-item img, .video-item img {
+                height: 200px;
+            }
+
+            .services h2, .rentals h2, .gallery h2, .video-gallery h2, .contact h2, .about h2 {
+                font-size: 2.2em;
+            }
+
+            .video-modal video, .video-modal .thumbnail-overlay {
+                width: 95%;
+                height: 50%;
+            }
+
+            .gallery-modal .container {
+                width: 95vmin;
+                height: 95vmin;
+                max-height: 500px;
+                max-width: 500px;
+            }
+
+            .footer-grid {
+                gap: 0.8rem;
+            }
+
+            .footer-col {
+                max-width: 250px;
+            }
+
+            .footer-logo {
+                max-width: 120px;
+            }
+
+            .logo-text {
+                font-size: 12px;
+            }
+
+            .footer-col h6 {
+                font-size: 13px;
+            }
+
+            .footer-col ul li a {
+                font-size: 0.85em;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Transparent Navbar with Hamburger -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Event Masterpiece Plus LLC Logo" class="navbar-logo" onerror="this.src='https://via.placeholder.com/160?text=Logo';">
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#rentals">Rentals</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#video-gallery">Videos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="cta-button">Get a Quote</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section Carousel -->
+    <section id="home" class="hero">
+        <div class="carousel">
+            <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+                <div class="carousel-content" data-aos="fade-up">
+                    <h1>Event Masterpiece Plus LLC</h1>
+                    <p>Transform your weddings with elegance and style.</p>
+                    <a href="#contact" class="cta-button">Plan Your Wedding</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+                <div class="carousel-content" data-aos="fade-up">
+                    <h1>Celebrate in Style</h1>
+                    <p>Vibrant decorations for unforgettable birthdays.</p>
+                    <a href="#contact" class="cta-button">Plan Your Birthday</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/2774550/pexels-photo-2774550.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+                <div class="carousel-content" data-aos="fade-up">
+                    <h1>Professional Elegance</h1>
+                    <p>Stunning setups for corporate events and AGMs.</p>
+                    <a href="#contact" class="cta-button">Plan Your Event</a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about" data-aos="fade-up">
+        <div class="acontainer">
+            <div class="contentLeft" data-aos="fade-left" data-aos-duration="1200">
+                <div class="row">
+                    <div class="imgWrapper">
+                        <img src="41c7d03e-203e-4f3e-bb2c-d78263cb6f6e.JPG" alt="Event Decor 1">
+                    </div>
+                    <div class="imgWrapper">
+                        <img src="44eca130-82e4-4df6-b43c-82ad11a65767.JPG" alt="Event Decor 2">
+                    </div>
+                    <div class="imgWrapper">
+                        <img src="453d2b24-9aec-4760-ba48-ad21340e2689.JPG" alt="Event Decor 3">
+                    </div>
+                    <div class="imgWrapper">
+                        <img src="503d5ea7-3665-4195-b3f3-179da0eb1f7b.JPG" alt="Event Decor 4">
+                    </div>
+                </div>
+            </div>
+            <div class="contentRight" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="acontent">
+                    <h4>Welcome</h4>
+                    <h2>About Event Masterpiece Plus LLC</h2>
+                    <p>
+                        Event Masterpiece Plus LLC is your trusted partner in creating unforgettable events. We specialize in elegant decorations and premium rentals for weddings, birthdays, corporate events, and more. With a focus on creativity and attention to detail, we transform your vision into reality, delivering stunning setups on time and within budget.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services" data-aos="fade-up">
+        <h2>Our Decoration Services</h2>
+        <div class="service-grid">
+            <div class="service-card" data-aos="zoom-in">
+                <img src="453d2b24-9aec-4760-ba48-ad21340e2689.JPG" alt="Wedding Decor" onerror="this.src='https://via.placeholder.com/300?text=Wedding+Decor';">
+                <h3>Weddings</h3>
+                <p>Elegant and romantic setups to make your special day unforgettable.</p>
+            </div>
+            <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
+                <img src="7f8d13b5-a784-43a2-859d-59ec340498a0.JPG" alt="Birthday Decor" onerror="this.src='https://via.placeholder.com/300?text=Birthday+Decor';">
+                <h3>Birthdays</h3>
+                <p>Vibrant and fun decorations for all ages.</p>
+            </div>
+            <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
+                <img src="0bed6848-99cc-477a-ac09-037a147fa81a.JPG" alt="Corporate Events" onerror="this.src='https://via.placeholder.com/300?text=Corporate+Events';">
+                <h3>Corporate Events</h3>
+                <p>Professional setups for AGMs, promotions, and more.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rentals Section -->
+    <section id="rentals" class="rentals" data-aos="fade-up">
+        <h2>Our Rental Items</h2>
+        <div class="rental-grid">
+            <div class="rental-card" data-aos="zoom-in">
+                <img src="59b2a5a8-f91d-44ff-b15a-86d71b2d7ee1.JPG" alt="Chiavari Chairs" onerror="this.src='https://via.placeholder.com/300?text=Chiavari+Chairs';">
+                <h3>Chiavari Chairs</h3>
+                <p>Stylish and elegant seating for any event.</p>
+            </div>
+            <div class="rental-card" data-aos="zoom-in" data-aos-delay="100">
+                <img src="44eca130-82e4-4df6-b43c-82ad11a65767.JPG" alt="Lounge Chairs" onerror="this.src='https://via.placeholder.com/300?text=Lounge+Chairs';">
+                <h3>Lounge Chairs</h3>
+                <p>Comfortable and chic seating options.</p>
+            </div>
+            <div class="rental-card" data-aos="zoom-in" data-aos-delay="200">
+                <img src="41c7d03e-203e-4f3e-bb2c-d78263cb6f6e.JPG" alt="Table Covers" onerror="this.src='https://via.placeholder.com/300?text=Table+Covers';">
+                <h3>Table Covers & Centerpieces</h3>
+                <p>Custom designs to elevate your tablescapes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery Section -->
+    <section id="gallery" class="gallery" data-aos="fade-up">
+        <h2>Our Photo Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-aos="fade-up" data-image="0bed6848-99cc-477a-ac09-037a147fa81a.JPG">
+                <img src="0bed6848-99cc-477a-ac09-037a147fa81a.JPG" alt="Event Image 1">
+                <div class="gallery-overlay">
+                    <p>Event Image 1</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100" data-image="2025d835-cece-4f72-a07c-2f80eb8431b3.JPG">
+                <img src="2025d835-cece-4f72-a07c-2f80eb8431b3.JPG" alt="Event Image 2">
+                <div class="gallery-overlay">
+                    <p>Event Image 2</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200" data-image="7f8d13b5-a784-43a2-859d-59ec340498a0.JPG">
+                <img src="7f8d13b5-a784-43a2-859d-59ec340498a0.JPG" alt="Event Image 3">
+                <div class="gallery-overlay">
+                    <p>Event Image 3</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300" data-image="34372337-75cb-433b-ba09-979bb007c4b8.JPG">
+                <img src="34372337-75cb-433b-ba09-979bb007c4b8.JPG" alt="Event Image 4">
+                <div class="gallery-overlay">
+                    <p>Event Image 4</p>
+                </div>
+            </div>
+        </div>
+        <button class="view-more-button" onclick="openGalleryModal()" data-aos="zoom-in" data-aos-delay="200">
+            <span>View More</span>
+            <div class="shine"></div>
+        </button>
+    </section>
+
+    <!-- Video Gallery Section -->
+    <section id="video-gallery" class="video-gallery" data-aos="fade-up">
+        <h2>Our Video Gallery</h2>
+        <div class="video-grid">
+            <div class="video-item" data-aos="fade-up" data-video="455b7e34-3efc-4b76-a374-7d9861f073ba.MP4">
+                <img src="59b2a5a8-f91d-44ff-b15a-86d71b2d7ee1.JPG" alt="Event Video 1">
+                <div class="video-overlay">
+                    <p>Event Video 1</p>
+                    <i class="fas fa-play play-icon"></i>
+                </div>
+            </div>
+            <div class="video-item" data-aos="fade-up" data-aos-delay="100" data-video="b25d656e-d54d-4ecd-81ef-ba4323713cbf.MP4">
+                <img src="5c506ca1-ade8-49f6-b473-6b31c707dfbe.JPG" alt="Event Video 2">
+                <div class="video-overlay">
+                    <p>Event Video 2</p>
+                    <i class="fas fa-play play-icon"></i>
+                </div>
+            </div>
+            <div class="video-item" data-aos="fade-up" data-aos-delay="200" data-video="04323da1-17e9-4c7b-97d7-0179829e9a05.MP4">
+                <img src="bfc697d5-5c11-47bf-9324-44ea1cb412cb.JPG" alt="Event Video 3">
+                <div class="video-overlay">
+                    <p>Event Video 3</p>
+                    <i class="fas fa-play play-icon"></i>
+                </div>
+            </div>
+            <div class="video-item" data-aos="fade-up" data-aos-delay="300" data-video="086e0c4a-853c-4d77-991a-410654707675.MP4">
+                <img src="08a17491-bde3-48e9-9b0c-28799fa09af5.JPG" alt="Event Video 4">
+                <div class="video-overlay">
+                    <p>Event Video 4</p>
+                    <i class="fas fa-play play-icon"></i>
+                </div>
+            </div>
+        </div>
+        <button class="view-more-button" onclick="openVideoModal()" data-aos="zoom-in" data-aos-delay="200">
+            <span>View More Videos</span>
+            <div class="shine"></div>
+        </button>
+    </section>
+
+    <!-- Lightbox for Images -->
+    <div class="lightbox">
+        <span class="close-modal"><i class="fas fa-times"></i></span>
+        <div class="modal-controls">
+            <button onclick="prevLightboxImage()">&#10094;</button>
+            <button onclick="nextLightboxImage()">&#10095;</button>
+        </div>
+        <img src="" alt="Lightbox Image">
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal">
+        <span class="close-modal"><i class="fas fa-times"></i></span>
+        <div class="modal-controls">
+            <button onclick="prevVideo()">&#10094;</button>
+            <button onclick="nextVideo()">&#10095;</button>
+        </div>
+        <div class="thumbnail-overlay">
+            <i class="fas fa-play play-icon"></i>
+        </div>
+        <video controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- React Gallery Modal -->
+    <div class="gallery-modal">
+        <span class="close-modal"><i class="fas fa-times"></i></span>
+        <div id="react-gallery" class="container shadow"></div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" data-aos="fade-up">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="text" placeholder="Event Type" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p style="margin-top: 20px;">Email: victoressang.ng@gmail.com | Phone: +1 302 500-9067</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="advanced-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img class="footer-logo" src="logo.png" alt="Event Masterpiece Plus LLC Logo" onerror="this.src='https://via.placeholder.com/160?text=Logo';">
+                <p class="logo-text">Transforming your events with elegance and creativity since 2025.</p>
+            </div>
+            <div class="footer-col">
+                <h6>Contact Us</h6>
+                <ul>
+                    <li><a href="#" class="contact-link">186 Conach Lane, Clayton, DE 19938, USA</a></li>
+                    <li><a href="tel:+13025009067" class="contact-link">+1 302 500-9067</a></li>
+                    <li><a href="mailto:info@eventmasterpieceplus.com" class="contact-link">victoressang.ng@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h6>Explore</h6>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#rentals">Rentals</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#video-gallery">Videos</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h6>Follow Us</h6>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Event Masterpiece Plus LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Dependencies -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" onerror="console.error('AOS failed to load')"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" onerror="console.error('Babel failed to load')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.1/umd/react.production.min.js" onerror="console.error('React failed to load')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js" onerror="console.error('ReactDOM failed to load')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" onerror="console.error('GSAP failed to load')"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js" onerror="console.error('MotionPathPlugin failed to load')"></script>
+    <script type="text/babel">
+        // Register GSAP plugin
+        if (typeof gsap !== 'undefined' && typeof MotionPathPlugin !== 'undefined') {
+            gsap.registerPlugin(MotionPathPlugin);
+        } else {
+            console.error('GSAP or MotionPathPlugin not loaded');
+        }
+
+        // React Gallery Code
+        const App = () => {
+            const [opened, setOpened] = React.useState(0);
+            const [inPlace, setInPlace] = React.useState(0);
+            const [disabled, setDisabled] = React.useState(false);
+
+            const images = [
+                { title: 'Event Image 5', url: '0bed6848-99cc-477a-ac09-037a147fa81a.JPG' },
+                { title: 'Event Image 6', url: '2025d835-cece-4f72-a07c-2f80eb8431b3.JPG' },
+                { title: 'Event Image 7', url: '7f8d13b5-a784-43a2-859d-59ec340498a0.JPG' },
+                { title: 'Event Image 8', url: '34372337-75cb-433b-ba09-979bb007c4b8.JPG' },
+                { title: 'Event Image 9', url: '8af046f9-9b50-4a3d-87e3-b19f7147ebf8.JPG' },
+            ];
+
+            const onClick = (index) => { if (!disabled) setOpened(index); };
+            const onInPlace = (index) => setInPlace(index);
+
+            const next = () => {
+                let nextIndex = opened + 1;
+                if (nextIndex >= images.length) nextIndex = 0;
+                onClick(nextIndex);
+            };
+
+            React.useEffect(() => setDisabled(true), [opened]);
+            React.useEffect(() => setDisabled(false), [inPlace]);
+
+            return (
+                <React.Fragment>
+                    <div class="container shadow">
+                        {images.map((image, i) => (
+                            <div key={image.url} class="image" style={{zIndex: inPlace === i ? i : images.length + 1}}>
+                                <Image total={images.length} id={i} url={image.url} title={image.title} open={opened === i} inPlace={inPlace === i} onInPlace={onInPlace} />
+                            </div>
+                        ))}
+                        <div class="tabs">
+                            <Tabs class="tabs" images={images} onSelect={onClick} />
+                        </div>
+                    </div>
+                    <button class="button next shadow" onClick={next}>
+                        <svg width="32" height="32" viewBox="0 0 24 24">
+                            <path fill="#fff" d="M8.59,16.59L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.59Z" />
+                        </svg>
+                    </button>
+                </React.Fragment>
+            );
+        };
+
+        const Image = ({url, title, open, inPlace, id, onInPlace, total}) => {
+            const [firstLoad, loaded] = React.useState(true);
+            const clip = React.useRef(null);
+            const border = React.useRef(null);
+
+            const gap = 15;
+            const circle = 10;
+            const defaults = { transformOrigin: 'center center' };
+            const duration = 0.4;
+            const width = 600;
+            const height = 600;
+            const scale = 1050;
+
+            let bigSize = (circle * scale);
+            let overlap = 0;
+
+            const getPosSmall = () => ({x: (width / 2) - ((total * ((circle * 2) + gap) - gap) / 2) + (id * ((circle * 2) + gap)), y: height - 45, scale: 1});
+            const getPosSmallAbove = () => ({x: (width / 2) - ((total * ((circle * 2) + gap) - gap) / 2) + (id * ((circle * 2) + gap)), y: height / 2, scale: 1});
+            const getPosSmallBelow = () => ({x: width * 0.5, y: height - 45, scale: 1});
+            const getPosCenter = () => ({x: width / 2, y: height / 2, scale: 10});
+            const getPosEnd = () => ({x: width / 2 - bigSize + overlap, y: height / 2, scale: scale});
+            const getPosStart = () => ({x: width / 2 + bigSize - overlap, y: height / 2, scale: scale});
+
+            const onStateChange = () => {
+                loaded(false);
+                if (border.current) {
+                    gsap.set(border.current, { ...defaults, ...getPosSmall() });
+                }
+                if (clip.current) {
+                    let flipDuration = firstLoad ? 0 : duration;
+                    let upDuration = firstLoad ? 0 : 0.2;
+                    let bounceDuration = firstLoad ? 0.01 : 1;
+                    let delay = firstLoad ? 0 : flipDuration + upDuration;
+
+                    if (open) {
+                        gsap.timeline()
+                            .set(clip.current, { ...defaults, ...getPosSmall() })
+                            .to(clip.current, { ...defaults, ...getPosCenter(), duration: upDuration, ease: 'power3.inOut' })
+                            .to(clip.current, { ...defaults, ...getPosEnd(), duration: flipDuration, ease: 'power4.in', onComplete: () => onInPlace(id) });
+                    } else {
+                        gsap.timeline({ overwrite: true })
+                            .set(clip.current, { ...defaults, ...getPosStart() })
+                            .to(clip.current, { ...defaults, ...getPosCenter(), delay: delay, duration: flipDuration, ease: 'power4.out' })
+                            .to(clip.current, { ...defaults, motionPath: [getPosSmallAbove(), getPosSmall()], duration: bounceDuration, ease: 'bounce.out' });
+                    }
+                }
+            };
+
+            React.useEffect(onStateChange, [open, clip]);
+
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                        <clipPath id={id + "_circleClip"}>
+                            <circle class="clip" cx="0" cy="0" r={circle} ref={clip}></circle>
+                        </clipPath>
+                        <clipPath id={id + "_squareClip"}>
+                            <rect class="clip" width={width} height={height}></rect>
+                        </clipPath>
+                    </defs>
+                    <g clipPath={`url(#${id + (inPlace ? '_squareClip' : '_circleClip')})`}>
+                        <image width={width} height={height} xlinkHref={url}></image>
+                    </g>
+                </svg>
+            );
+        };
+
+        const Tabs = ({images, onSelect}) => {
+            const gap = 15;
+            const circle = 10;
+            const defaults = { transformOrigin: 'center center' };
+            const width = 600;
+            const height = 600;
+
+            const getPosX = (i) => (width / 2) - ((images.length * ((circle * 2) + gap) - gap) / 2) + (i * ((circle * 2) + gap));
+            const getPosY = (i) => height - 45;
+
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice">
+                    {(!images ? [] : images).map((image, i) => (
+                        <circle onClick={() => onSelect(i)} class="border" cx={getPosX(i)} cy={getPosY(i)} r={circle + 2}></circle>
+                    ))}
+                </svg>
+            );
+        };
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Carousel Functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            const carousel = document.querySelector('.carousel');
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Auto-slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Lightbox for Images
+        let currentLightboxIndex = 0;
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const closeLightbox = lightbox.querySelector('.close-modal');
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentLightboxIndex = index;
+                lightboxImg.src = item.dataset.image;
+                lightboxImg.alt = item.querySelector('img').alt;
+                lightbox.classList.add('active');
+            });
+        });
+
+        function nextLightboxImage() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentLightboxIndex].dataset.image;
+            lightboxImg.alt = galleryItems[currentLightboxIndex].querySelector('img').alt;
+        }
+
+        function prevLightboxImage() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentLightboxIndex].dataset.image;
+            lightboxImg.alt = galleryItems[currentLightboxIndex].querySelector('img').alt;
+        }
+
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Video Modal
+        let currentVideoIndex = 0;
+        const videoItems = document.querySelectorAll('.video-item');
+        const videoModal = document.querySelector('.video-modal');
+        const videoElement = videoModal.querySelector('video');
+        const thumbnailOverlay = videoModal.querySelector('.thumbnail-overlay');
+        const closeVideoModal = videoModal.querySelector('.close-modal');
+        const videoList = [
+            { 
+                src: '455b7e34-3efc-4b76-a374-7d9861f073ba.MP4', 
+                alt: 'Event Video 1', 
+                thumbnail: '59b2a5a8-f91d-44ff-b15a-86d71b2d7ee1.JPG' 
+            },
+            { 
+                src: 'b25d656e-d54d-4ecd-81ef-ba4323713cbf.MP4', 
+                alt: 'Event Video 2', 
+                thumbnail: '5c506ca1-ade8-49f6-b473-6b31c707dfbe.JPG' 
+            },
+            { 
+                src: '04323da1-17e9-4c7b-97d7-0179829e9a05.MP4', 
+                alt: 'Event Video 3', 
+                thumbnail: 'bfc697d5-5c11-47bf-9324-44ea1cb412cb.JPG' 
+            },
+            { 
+                src: '086e0c4a-853c-4d77-991a-410654707675.MP4', 
+                alt: 'Event Video 4', 
+                thumbnail: '08a17491-bde3-48e9-9b0c-28799fa09af5.JPG' 
+            },
+            { 
+                src: '129cc370-8357-4801-aa30-c77e09cfd247.MP4', 
+                alt: 'Event Video 5', 
+                thumbnail: '09f3c24b-ad12-4a98-9946-504b15a35fdb.JPG' 
+            }
+        ];
+
+        videoItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentVideoIndex = index;
+                videoElement.querySelector('source').src = videoList[index].src;
+                thumbnailOverlay.style.backgroundImage = `url('${videoList[index].thumbnail}')`;
+                thumbnailOverlay.classList.add('active');
+                videoElement.load();
+                videoModal.classList.add('active');
+            });
+        });
+
+        videoElement.addEventListener('play', () => {
+            thumbnailOverlay.classList.remove('active');
+        });
+
+        thumbnailOverlay.addEventListener('click', () => {
+            videoElement.play();
+            thumbnailOverlay.classList.remove('active');
+        });
+
+        function updateVideo(index) {
+            videoElement.querySelector('source').src = videoList[index].src;
+            thumbnailOverlay.style.backgroundImage = `url('${videoList[index].thumbnail}')`;
+            thumbnailOverlay.classList.add('active');
+            videoElement.load();
+            videoModal.classList.add('active');
+        }
+
+        function nextVideo() {
+            currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
+            updateVideo(currentVideoIndex);
+        }
+
+        function prevVideo() {
+            currentVideoIndex = (currentVideoIndex - 1 + videoList.length) % videoList.length;
+            updateVideo(currentVideoIndex);
+        }
+
+        closeVideoModal.addEventListener('click', () => {
+            videoModal.classList.remove('active');
+            videoElement.pause();
+            videoElement.querySelector('source').src = '';
+            thumbnailOverlay.classList.remove('active');
+        });
+
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.classList.remove('active');
+                videoElement.pause();
+                videoElement.querySelector('source').src = '';
+                thumbnailOverlay.classList.remove('active');
+            }
+        });
+
+        // Video Gallery Modal
+        function openVideoModal() {
+            currentVideoIndex = 0;
+            updateVideo(currentVideoIndex);
+        }
+
+        // React Gallery Modal
+        const galleryModal = document.querySelector('.gallery-modal');
+        const closeGalleryModal = galleryModal.querySelector('.close-modal');
+
+        function openGalleryModal() {
+            galleryModal.classList.add('active');
+        }
+
+        closeGalleryModal.addEventListener('click', () => {
+            galleryModal.classList.remove('active');
+        });
+
+        galleryModal.addEventListener('click', (e) => {
+            if (e.target === galleryModal) {
+                galleryModal.classList.remove('active');
+            }
+        });
+
+        // Render React Gallery
+        try {
+            ReactDOM.render(<App />, document.getElementById('react-gallery'));
+        } catch (e) {
+            console.error('Failed to render React gallery:', e);
+        }
+    </script>
+</body>
+</html>
